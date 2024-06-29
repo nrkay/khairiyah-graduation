@@ -290,8 +290,12 @@ https://templatemo.com/tm-560-astro-motion
                   <div class="tm-mb-45">
                     Tel: <a href="tel:0100200340" class="tm-link-white">010-020-0340</a>
                   </div>
-                  <audio id="myAudio" src="music.mp3" controls style="display: none;"></audio>
-                 
+                  <!-- <audio id="myAudio" src="music.mp3" controls style="display: none;"></audio>
+                  -->
+                  <audio id="myAudio" preload="auto">
+                    <source src="music.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                  </audio>
                   <!-- Map -->
                   <div class="map-outer">
                     <div class="gmap-canvas">
@@ -386,37 +390,31 @@ https://templatemo.com/tm-560-astro-motion
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       var audio = document.getElementById('myAudio');
-  
-      // Function to play audio
+
+      // Attempt to play audio
       function playAudio() {
         audio.play().then(function() {
           console.log('Audio is playing');
-          audio.style.display = 'block'; // Show audio player after successful play
         }).catch(function(error) {
           console.log('Failed to play audio:', error);
-          // Request user interaction to play audio
-          alert('Tap anywhere on the screen to start playing the audio.');
-  
-          // Handle user interaction
-          document.addEventListener('touchstart', handleTouchStart);
-          document.addEventListener('mousedown', handleTouchStart);
+          // Handle autoplay restriction
+          audio.addEventListener('play', function() {
+            console.log('Audio is playing after user interaction');
+          });
         });
       }
-  
-      // Function to handle touch/mouse event
+
+      // Handle user interaction to play audio
+      document.addEventListener('touchstart', handleTouchStart);
+      document.addEventListener('mousedown', handleTouchStart);
+
       function handleTouchStart() {
-        audio.play().then(function() {
-          console.log('Audio is playing');
-          audio.style.display = 'block'; // Show audio player after successful play
-        }).catch(function(error) {
-          console.log('Failed to play audio:', error);
-        }).finally(function() {
-          // Remove event listeners after playing audio
-          document.removeEventListener('touchstart', handleTouchStart);
-          document.removeEventListener('mousedown', handleTouchStart);
-        });
+        playAudio();
+        // Remove event listeners after interaction
+        document.removeEventListener('touchstart', handleTouchStart);
+        document.removeEventListener('mousedown', handleTouchStart);
       }
-  
+
       // Attempt to play audio on page load
       playAudio();
     });
