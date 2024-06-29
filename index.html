@@ -290,6 +290,8 @@ https://templatemo.com/tm-560-astro-motion
                   <div class="tm-mb-45">
                     Tel: <a href="tel:0100200340" class="tm-link-white">010-020-0340</a>
                   </div>
+                  <audio id="myAudio" src="music.mp3" controls style="display: none;"></audio>
+                 
                   <!-- Map -->
                   <div class="map-outer">
                     <div class="gmap-canvas">
@@ -304,6 +306,7 @@ https://templatemo.com/tm-560-astro-motion
           </li>
         </ul>
     </div>
+
     <div class="container-fluid">
       <footer class="row mx-auto tm-footer">
         <div class="col-md-6 px-0">
@@ -315,17 +318,19 @@ https://templatemo.com/tm-560-astro-motion
       </footer>
     </div>
   </div>
+
   <!-- Preloader, https://ihatetomatoes.net/create-custom-preloading-screen/ -->
   <div id="loader-wrapper">            
     <div id="loader"></div>
     <div class="loader-section section-left"></div>
     <div class="loader-section section-right"></div>
   </div>  
+  
   <script src="js/jquery-3.5.1.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/slick.js"></script>
   <script src="js/templatemo-script.js"></script>
-  <script>
+  <!-- <script>
     var source = "music.mp3"
  var audio = document.createElement("audio");
  //
@@ -337,5 +342,46 @@ https://templatemo.com/tm-560-astro-motion
  }, true);
  audio.src = source;
   </script>
+  -->
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var audio = document.getElementById('myAudio');
+  
+      // Function to play audio
+      function playAudio() {
+        audio.play().then(function() {
+          console.log('Audio is playing');
+          audio.style.display = 'block'; // Show audio player after successful play
+        }).catch(function(error) {
+          console.log('Failed to play audio:', error);
+          // Request user interaction to play audio
+          alert('Tap anywhere on the screen to start playing the audio.');
+  
+          // Handle user interaction
+          document.addEventListener('touchstart', handleTouchStart);
+          document.addEventListener('mousedown', handleTouchStart);
+        });
+      }
+  
+      // Function to handle touch/mouse event
+      function handleTouchStart() {
+        audio.play().then(function() {
+          console.log('Audio is playing');
+          audio.style.display = 'block'; // Show audio player after successful play
+        }).catch(function(error) {
+          console.log('Failed to play audio:', error);
+        }).finally(function() {
+          // Remove event listeners after playing audio
+          document.removeEventListener('touchstart', handleTouchStart);
+          document.removeEventListener('mousedown', handleTouchStart);
+        });
+      }
+  
+      // Attempt to play audio on page load
+      playAudio();
+    });
+  </script>
+  
 </body>
 </html>
