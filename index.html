@@ -344,6 +344,45 @@ https://templatemo.com/tm-560-astro-motion
   </script>
   -->
 
+  <!-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var audio = document.getElementById('myAudio');
+  
+      // Function to play audio
+      function playAudio() {
+        audio.play().then(function() {
+          console.log('Audio is playing');
+          audio.style.display = 'block'; // Show audio player after successful play
+        }).catch(function(error) {
+          console.log('Failed to play audio:', error);
+          // Request user interaction to play audio
+          alert('Tap anywhere on the screen to start playing the audio.');
+  
+          // Handle user interaction
+          document.addEventListener('touchstart', handleTouchStart);
+          document.addEventListener('mousedown', handleTouchStart);
+        });
+      }
+  
+      // Function to handle touch/mouse event
+      function handleTouchStart() {
+        audio.play().then(function() {
+          console.log('Audio is playing');
+          audio.style.display = 'block'; // Show audio player after successful play
+        }).catch(function(error) {
+          console.log('Failed to play audio:', error);
+        }).finally(function() {
+          // Remove event listeners after playing audio
+          document.removeEventListener('touchstart', handleTouchStart);
+          document.removeEventListener('mousedown', handleTouchStart);
+        });
+      }
+  
+      // Attempt to play audio on page load
+      playAudio();
+    });
+  </script> -->
+
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       var audio = document.getElementById('myAudio');
@@ -382,6 +421,7 @@ https://templatemo.com/tm-560-astro-motion
       playAudio();
     });
   </script>
+  
   
 </body>
 </html>
